@@ -12,6 +12,14 @@ fun HomeScreen(){
 
         Text(text = "Home Screen")
         Text(text = "Suraj")
+        Text(text = "Home Screen")
+        Text(text = "Suraj")
+        Text(text = "Home Screen")
+        Text(text = "Suraj")
+        Text(text = "Home Screen")
+        Text(text = "Suraj")
+        Text(text = "Home Screen")
+        Text(text = "Suraj")
     }
     
 }
