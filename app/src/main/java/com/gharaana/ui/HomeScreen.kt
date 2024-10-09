@@ -1,4 +1,9 @@
 package com.gharaana.ui
 
-//hello
-//My name is shani kumar
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+
+@Composable
+fun HomeScreen(){
+    Text(text = "Home Screen")
+}
