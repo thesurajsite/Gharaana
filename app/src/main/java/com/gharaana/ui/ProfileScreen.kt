@@ -18,7 +18,7 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
         
         Text(text = "Profile Screen")
         
-        
+        Text(text = "Shani kumar developer")
     }
     
 }
