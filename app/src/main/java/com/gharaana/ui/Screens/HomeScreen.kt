@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -40,28 +41,41 @@ fun HomeScreen() {
         R.drawable.d,
         R.drawable.e,
     )
-
-
-    Scaffold()
+    
+    Scaffold(modifier = Modifier.fillMaxSize())
     { padding->
 
-        // AUTO SCROLL CAROUSEL
-        Card(
-            modifier = Modifier.padding(16.dp),
-            shape = RoundedCornerShape(16.dp),
-        ) {
-            AutoSlidingCarousel(
-                itemsCount = images.size,
-                itemContent = { index ->
-                    Image(
-                        painter = painterResource(id = images[index]),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.height(200.dp)
-                    )
-                }
-            )
+
+        Column(modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top)
+        {
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            // AUTO SCROLL CAROUSEL
+            Card(
+                modifier = Modifier.padding(16.dp),
+                shape = RoundedCornerShape(16.dp),
+            ) {
+                AutoSlidingCarousel(
+                    itemsCount = images.size,
+                    itemContent = { index ->
+                        Image(
+                            painter = painterResource(id = images[index]),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier.height(200.dp)
+                        )
+                    }
+                )
+            }
+
+
+
         }
+        
+
 
     }
 }
