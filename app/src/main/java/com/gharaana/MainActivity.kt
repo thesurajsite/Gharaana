@@ -33,3 +33,15 @@ class MainActivity : ComponentActivity() {
 fun GreetingPreview() {
 
 }
+
+
+
+// git status
+// git add .
+// git status
+// git commit -m "your message"
+// git push origin shani
+// then create a pull request
+
+
+// git pull upstream master
