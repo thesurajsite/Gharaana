@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.gharaana"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.gharaana"
@@ -66,4 +66,14 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(libs.material3)
+    implementation("androidx.compose.material3:material3-window-size-class:1.3.0")
+    implementation("androidx.compose.material3:material3-adaptive-navigation-suite:1.4.0-alpha01")
+
+
+    implementation ("com.google.accompanist:accompanist-pager:0.22.0-rc")
+    implementation("io.coil-kt:coil-compose:2.1.0")
+
+
 }
