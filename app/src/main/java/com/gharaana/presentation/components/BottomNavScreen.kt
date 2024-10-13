@@ -7,12 +7,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.BottomNavigation
-import androidx.compose.material.DrawerDefaults.backgroundColor
-import androidx.compose.material.FabPosition
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.FabPosition
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Menu
@@ -37,9 +35,9 @@ import com.gharaana.Utils.ItemsList
 import com.gharaana.presentation.Inbox.Inbox
 import com.gharaana.presentation.NavGraph.Routes
 import com.gharaana.presentation.ShoppingCart.ShoppingCart
-import com.gharaana.presentation.home.HomeScreen
 import com.gharaana.presentation.profile.ProfileScreen
 import com.gharaana.R
+import com.gharaana.ui.Screens.HomeScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -95,7 +93,7 @@ fun BottomNavScreen(navController: NavController) {
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(route = Routes.Home.routes) {
-                HomeScreen(navController)
+                HomeScreen()
             }
             composable(route = Routes.Inbox.routes) {
                 Inbox()

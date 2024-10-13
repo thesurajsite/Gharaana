@@ -8,7 +8,6 @@ import androidx.navigation.compose.rememberNavController
 import com.gharaana.presentation.Inbox.Inbox
 import com.gharaana.presentation.ShoppingCart.ShoppingCart
 import com.gharaana.presentation.components.BottomNavScreen
-import com.gharaana.presentation.home.HomeScreen
 import com.gharaana.presentation.profile.ProfileScreen
 
 @Composable

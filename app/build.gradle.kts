@@ -67,26 +67,26 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation(libs.material3)
+    // Material Icons
+    implementation("androidx.compose.material:material-icons-core:1.7.3")
+    implementation("androidx.compose.material:material-icons-extended:1.7.3")
+
+    // Material
+    implementation ("com.google.android.material:material:1.4.0")
+    implementation("androidx.compose.material:material:1.7.3")
     implementation("androidx.compose.material3:material3-window-size-class:1.3.0")
     implementation("androidx.compose.material3:material3-adaptive-navigation-suite:1.4.0-alpha01")
-    implementation(libs.androidx.material)
 
-
+    // Pager
     implementation ("com.google.accompanist:accompanist-pager:0.22.0-rc")
-    implementation("io.coil-kt:coil-compose:2.1.0")
+    implementation("io.coil-kt:coil-compose:2.6.0")
     implementation(kotlin("script-runtime"))
 
+    // Jetpack Compose Navigation
+    implementation("androidx.navigation:navigation-compose:2.8.2")
 
-
-    // Jetpack Compose integration
-    implementation(libs.androidx.navigation.compose)
-
-
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    // ViewModel utilities for Compose
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation (libs.androidx.material.icons.extended)
-
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.6")
 
 }
