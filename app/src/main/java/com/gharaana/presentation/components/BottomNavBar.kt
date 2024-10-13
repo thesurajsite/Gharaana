@@ -26,13 +26,14 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.gharaana.R
 import com.gharaana.Utils.ItemsList
 
 
 
 @Composable
 fun BottomNavBar(tabBarItems :List<BottomNavModel>, navController: NavController){
-    BottomNavigation(backgroundColor = Color.LightGray) {
+    BottomNavigation(backgroundColor = colorResource(id = R.color.light_grey)) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
 
