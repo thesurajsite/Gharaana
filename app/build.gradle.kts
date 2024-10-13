@@ -70,10 +70,23 @@ dependencies {
     implementation(libs.material3)
     implementation("androidx.compose.material3:material3-window-size-class:1.3.0")
     implementation("androidx.compose.material3:material3-adaptive-navigation-suite:1.4.0-alpha01")
+    implementation(libs.androidx.material)
 
 
     implementation ("com.google.accompanist:accompanist-pager:0.22.0-rc")
     implementation("io.coil-kt:coil-compose:2.1.0")
+    implementation(kotlin("script-runtime"))
+
+
+
+    // Jetpack Compose integration
+    implementation(libs.androidx.navigation.compose)
+
+
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    // ViewModel utilities for Compose
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation (libs.androidx.material.icons.extended)
 
 
 }

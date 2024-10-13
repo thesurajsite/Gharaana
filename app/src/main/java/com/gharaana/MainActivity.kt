@@ -6,8 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.gharaana.ui.Screens.HomeScreen
-import com.gharaana.ui.Screens.ProfileScreen
+import com.gharaana.presentation.NavGraph.SetNavGraph
+import com.gharaana.presentation.components.BottomNavScreen
+import com.gharaana.presentation.home.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,7 +16,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
 
-            HomeScreen()
+              SetNavGraph()
 
 
         }
@@ -29,3 +30,15 @@ class MainActivity : ComponentActivity() {
 fun GreetingPreview() {
 
 }
+
+
+
+// git status
+// git add .
+// git status
+// git commit -m "your message"
+// git push origin shani
+// then create a pull request
+
+
+// git pull upstream master
