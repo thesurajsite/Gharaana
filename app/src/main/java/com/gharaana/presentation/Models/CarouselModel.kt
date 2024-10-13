@@ -1,4 +1,4 @@
-package com.gharaana.Models
+package com.gharaana.presentation.Models
 
 import com.gharaana.R
 
