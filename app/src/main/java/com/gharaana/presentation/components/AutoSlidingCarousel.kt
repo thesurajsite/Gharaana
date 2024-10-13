@@ -1,5 +1,6 @@
-package com.gharaana.ui.Elements
+package com.gharaana.presentation.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Box
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
+
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -30,7 +32,7 @@ import kotlinx.coroutines.delay
 
 const val AUTO_SLIDE_DURATION = 2000L
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalPagerApi::class)
 @Composable
 fun AutoSlidingCarousel(
     modifier: Modifier = Modifier,

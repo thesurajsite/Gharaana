@@ -48,7 +48,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.gharaana.R
-import com.gharaana.ui.Elements.AutoSlidingCarousel
+import com.gharaana.presentation.components.AutoSlidingCarousel
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 
@@ -66,7 +66,7 @@ fun HomeScreen() {
         R.drawable.d,
         R.drawable.e,
     )
-    
+
     Scaffold(modifier = Modifier.fillMaxSize())
     { padding->
 
