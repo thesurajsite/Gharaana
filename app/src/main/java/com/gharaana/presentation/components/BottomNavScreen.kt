@@ -69,7 +69,7 @@ fun BottomNavScreen(navController: NavController) {
 
                 },
                 shape = RoundedCornerShape(50),
-                containerColor = Color.Red
+                containerColor = colorResource(id = R.color.orange)
             ) {
                 Icon(Icons.Filled.Add, tint = Color.White, contentDescription = "Add")
             }
