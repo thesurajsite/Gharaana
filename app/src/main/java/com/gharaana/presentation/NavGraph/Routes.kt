@@ -9,4 +9,7 @@ sealed class Routes(val routes: String) {
     object Profile :Routes("profile")
     object BottomNavScreen:Routes("bottom_nav_screen")
 
+    object UserSignupDetailsScreen:Routes("user_signup_detail")
+
+
 }
