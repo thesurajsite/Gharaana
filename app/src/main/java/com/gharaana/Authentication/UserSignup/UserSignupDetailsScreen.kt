@@ -1,5 +1,6 @@
 package com.gharaana.Authentication.UserSignup
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -122,6 +123,7 @@ fun UserSignupDetailsScreen(navController: NavController){
 
             signupState.error?.let {
                 Text(it, color = Color.Black)
+                Log.d("apicall", "$it")
             }
 
             LaunchedEffect(signupState.isOtpSent) {

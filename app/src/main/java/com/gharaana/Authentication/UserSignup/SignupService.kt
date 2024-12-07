@@ -6,7 +6,7 @@ import retrofit2.http.POST
 
 interface SignupService {
 
-    @POST("signup")
+    @POST("customer/signup")
     suspend fun signupWithOtp(
         @Body customerSignUpRequest: SignupDataRequestClass
     ): Response<SignupResponseDataClass>
