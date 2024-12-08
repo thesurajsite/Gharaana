@@ -8,5 +8,5 @@ data class SignupState(
     val location: String?="",
     val isLoading: Boolean?=false,
     val isOtpSent: Boolean?=false,
-    val error: String?=""
+    val message: String?=""
 )

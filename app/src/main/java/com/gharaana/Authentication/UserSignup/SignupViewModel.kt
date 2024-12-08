@@ -29,7 +29,7 @@ class SignupViewModel(private val signupService: SignupService): ViewModel() {
             val currentState = _signupState.value
 
             if(currentState.phoneNo.isEmpty() || currentState.customerName!!.isEmpty()){
-             _signupState.update { it.copy(error="Please Fill All Details") }
+             _signupState.update { it.copy(message ="Please Fill All Details") }
                 return@launch
             }
 
@@ -45,7 +45,7 @@ class SignupViewModel(private val signupService: SignupService): ViewModel() {
                         it.copy(
                             isOtpSent = signupResponse?.accountCreated?:false,
                             isLoading = false,
-                            error = signupResponse!!.response
+                            message = signupResponse!!.response
                         )
                     }
                     Log.d("apicall","${signupResponse}")
@@ -55,7 +55,7 @@ class SignupViewModel(private val signupService: SignupService): ViewModel() {
                         it.copy(
                         isOtpSent = false,
                         isLoading = false,
-                        error = "signup failed"
+                        message = "Signup Failed"
                     ) }
                 }
             }
@@ -64,9 +64,10 @@ class SignupViewModel(private val signupService: SignupService): ViewModel() {
                     it.copy(
                         isOtpSent = false,
                         isLoading = false,
-                        error = e.localizedMessage
+                        message = "Some Error Occured"
                     )
                 }
+                Log.d("SignAPI",e.localizedMessage!!)
             }
         }
     }

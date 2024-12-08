@@ -3,8 +3,11 @@ package com.gharaana.Authentication.UserSignup
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,12 +15,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -29,8 +39,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -43,11 +58,8 @@ import com.gharaana.R
 fun UserSignupDetailsScreen(navController: NavController){
 
     val signupService = RetrofitInstance.signupService
-
-    // Create the ViewModel using the ViewModelFactory
+    // Created the ViewModel using the ViewModelFactory
     val viewModel: SignupViewModel = viewModel(factory = SignupViewModelFactory(signupService))
-
-
     val signupState by viewModel.signupState.collectAsState()
 
 
@@ -55,56 +67,76 @@ fun UserSignupDetailsScreen(navController: NavController){
     {
         padding->
 
+
         Column(modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
             .padding(padding)
-            .background(colorResource(R.color.orange)),
+            .background(colorResource(R.color.white)),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
 
             Image(
-                painter = painterResource(R.drawable.logo),
+                painter = painterResource(R.drawable.logo2),
                 contentDescription = "logo",
                 modifier = Modifier
-                    .size(200.dp)
+                    .size(300.dp)
             )
 
             Spacer(Modifier.height(30.dp))
 
             Text(text = "Gharaana Signup",
-                color = Color.White,
+                color = Color.Black,
                 fontSize = 30.sp
             )
 
-            Spacer(Modifier.height(30.dp))
+            Spacer(Modifier.height(10.dp))
 
-            TextField(
+            OutlinedTextField(
                 value = signupState.customerName!!,
-                onValueChange = {viewModel.updateCustomerName(it)},
+                onValueChange = { viewModel.updateCustomerName(it) },
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
-                    .height(50.dp)
-                    .background(colorResource(R.color.orange))
-                    .clip(RoundedCornerShape(8.dp)),
-                label = { Text("Name") }
+                    .height(60.dp),
+                label = { Text("Name") },
+                colors = OutlinedTextFieldDefaults.colors(
+                    unfocusedBorderColor = Color.Black, // White when not focused
+                    focusedBorderColor = Color.Black, // Primary color when focused
+                    focusedLabelColor = Color.Black, // Label color when focused
+                    unfocusedLabelColor = Color.Black, // Label color when not focused
+                    focusedTextColor = Color.Black, // Text color when focused
+                    unfocusedTextColor = Color.Black  // Text color when not focused
+                ),
+                textStyle = TextStyle(
+                    fontSize = 20.sp
+                )
             )
 
-            Spacer(Modifier.height(30.dp))
 
-            TextField(
+            Spacer(Modifier.height(10.dp))
+
+            OutlinedTextField(
                 value = signupState.phoneNo,
-                onValueChange = {viewModel.updatePhoneNo(it)},
+                onValueChange = { viewModel.updatePhoneNo(it) },
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
-                    .height(50.dp)
-                    .background(colorResource(R.color.orange))
-                    .clip(RoundedCornerShape(8.dp)),
-                label = { Text("Phone Number") }
+                    .height(60.dp),
+                label = { Text("Phone Number") },
+                colors = OutlinedTextFieldDefaults.colors(
+                    unfocusedBorderColor = Color.Black,
+                    focusedBorderColor = Color.Black,
+                    focusedLabelColor = Color.Black,
+                    unfocusedLabelColor = Color.Black,
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.Black
+                ),
+                textStyle = TextStyle(
+                    fontSize = 20.sp,
+                )
             )
 
-            Spacer(Modifier.height(30.dp))
+            Spacer(Modifier.height(10.dp))
 
             Button(
                 onClick = {
@@ -114,16 +146,16 @@ fun UserSignupDetailsScreen(navController: NavController){
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .height(50.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Green
-                )
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+                shape = RectangleShape,
             ) {
-                Text("Signup With OTP")
+                Text("Get Verification Code", fontSize = 20.sp)
             }
 
-            signupState.error?.let {
-                Text(it, color = Color.Black)
-                Log.d("apicall", "$it")
+            Spacer(Modifier.height(30.dp))
+
+            signupState.message?.let {
+                Text(it, color = Color.Red, fontSize = 20.sp)
             }
 
             LaunchedEffect(signupState.isOtpSent) {
