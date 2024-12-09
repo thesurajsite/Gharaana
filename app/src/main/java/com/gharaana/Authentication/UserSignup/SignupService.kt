@@ -11,4 +11,9 @@ interface SignupService {
         @Body customerSignUpRequest: SignupRequestDataClass
     ): Response<SignupResponseDataClass>
 
+    @POST("customer/signup/verify")
+    suspend fun signupVerify(
+        @Body customerSignupVerify : SignupVerifyRequest
+    ) : Response<SignupVerifyResponse>
+
 }

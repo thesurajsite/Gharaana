@@ -32,9 +32,11 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.gharaana.Authentication.UserSignup.RetrofitInstance
 import com.gharaana.Authentication.UserSignup.SignupService
 import com.gharaana.Authentication.UserSignup.SignupVerifyScreen
 import com.gharaana.Authentication.UserSignup.SignupViewModel
+import com.gharaana.Authentication.UserSignup.SignupViewModelFactory
 import com.gharaana.Authentication.UserSignup.UserSignupDetailsScreen
 import com.gharaana.Utils.ItemsList
 import com.gharaana.presentation.Inbox.Inbox
@@ -51,6 +53,11 @@ fun BottomNavScreen(navController: NavController) {
 
     val navController = rememberNavController()
     val openDialog = remember { mutableStateOf(false) }
+
+    val signupService = RetrofitInstance.signupService
+    // Created the ViewModel using the ViewModelFactory
+    val signupViewModel: SignupViewModel = viewModel(factory = SignupViewModelFactory(signupService))
+
 
     Scaffold(
         bottomBar = {
@@ -97,6 +104,8 @@ fun BottomNavScreen(navController: NavController) {
             startDestination = Routes.Home.routes,
             modifier = Modifier.padding(innerPadding)
         ) {
+
+
             composable(route = Routes.Home.routes) {
                 HomeScreen(navController)
             }
@@ -108,11 +117,11 @@ fun BottomNavScreen(navController: NavController) {
             }
 
             composable(route = Routes.Profile.routes) {
-                UserSignupDetailsScreen(navController)
+                UserSignupDetailsScreen(navController, signupViewModel)
             }
 
             composable(route = "signup_verify") {
-                SignupVerifyScreen()
+                SignupVerifyScreen(navController, signupViewModel)
             }
 
         }

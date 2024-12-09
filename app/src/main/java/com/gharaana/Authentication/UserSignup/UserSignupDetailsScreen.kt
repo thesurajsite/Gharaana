@@ -1,6 +1,7 @@
 package com.gharaana.Authentication.UserSignup
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -19,6 +20,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
@@ -40,12 +42,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -57,11 +61,11 @@ import com.gharaana.R
 import com.gharaana.presentation.NavGraph.Routes
 
 @Composable
-fun UserSignupDetailsScreen(navController: NavController){
+fun UserSignupDetailsScreen(navController: NavController, viewModel: SignupViewModel){
 
-    val signupService = RetrofitInstance.signupService
-    // Created the ViewModel using the ViewModelFactory
-    val viewModel: SignupViewModel = viewModel(factory = SignupViewModelFactory(signupService))
+//    val signupService = RetrofitInstance.signupService
+//    // Created the ViewModel using the ViewModelFactory
+//    val viewModel: SignupViewModel = viewModel(factory = SignupViewModelFactory(signupService))
     val signupState by viewModel.signupState.collectAsState()
 
 
@@ -114,7 +118,8 @@ fun UserSignupDetailsScreen(navController: NavController){
                 ),
                 textStyle = TextStyle(
                     fontSize = 20.sp
-                )
+                ),
+                singleLine = true
             )
 
 
@@ -137,15 +142,17 @@ fun UserSignupDetailsScreen(navController: NavController){
                 ),
                 textStyle = TextStyle(
                     fontSize = 20.sp,
-                )
+                ), keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number
+                ),
+                singleLine = true
             )
 
             Spacer(Modifier.height(10.dp))
 
             Button(
                 onClick = {
-//                    viewModel.signupWithOTP()
-                    navController.navigate("signup_verify")
+                    viewModel.signupWithOTP()
                 },
                 enabled = !signupState.isLoading!!,
                 modifier = Modifier
@@ -165,8 +172,10 @@ fun UserSignupDetailsScreen(navController: NavController){
                 Text(it, color = Color.Red, fontSize = 20.sp)
             }
 
+            val context = LocalContext.current
             LaunchedEffect(signupState.accountCreated) {
                 if(signupState.accountCreated!!){
+                    Toast.makeText(context, "OTP Sent", Toast.LENGTH_SHORT).show()
                     navController.navigate("signup_verify")
                 }
             }

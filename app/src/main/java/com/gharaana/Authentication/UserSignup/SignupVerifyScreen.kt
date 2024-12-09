@@ -1,5 +1,6 @@
 package com.gharaana.Authentication.UserSignup
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material3.Button
@@ -24,26 +26,29 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.gharaana.R
 import com.gharaana.presentation.NavGraph.Routes
+import kotlin.math.sin
 
 
 @Composable
-fun SignupVerifyScreen(){
+fun SignupVerifyScreen(navController: NavController, viewModel: SignupViewModel){
 
-    val signupService = RetrofitInstance.signupService
-    // Created the ViewModel using the ViewModelFactory
-    val viewModel: SignupViewModel = viewModel(factory = SignupViewModelFactory(signupService))
-    val signupState by viewModel.signupState.collectAsState()
+//    val signupService = RetrofitInstance.signupService
+//    // Created the ViewModel using the ViewModelFactory
+//    val viewModel: SignupViewModel = viewModel(factory = SignupViewModelFactory(signupService))
+    val signupVerifyState by viewModel.signupVerifyState.collectAsState()
 
 
     Scaffold(modifier = Modifier.fillMaxSize())
@@ -78,32 +83,36 @@ fun SignupVerifyScreen(){
             Spacer(Modifier.height(10.dp))
 
             OutlinedTextField(
-                value = signupState.customerName!!,
-                onValueChange = { viewModel.updateCustomerName(it) },
+                value = signupVerifyState.otp!!,
+                onValueChange = { viewModel.updateOtp(it) },
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .height(60.dp),
-                label = { Text("Name") },
+                label = { Text("Enter Verification Code") },
                 colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = Color.Black, // White when not focused
-                    focusedBorderColor = Color.Black, // Primary color when focused
-                    focusedLabelColor = Color.Black, // Label color when focused
-                    unfocusedLabelColor = Color.Black, // Label color when not focused
-                    focusedTextColor = Color.Black, // Text color when focused
-                    unfocusedTextColor = Color.Black  // Text color when not focused
+                    unfocusedBorderColor = Color.Black,
+                    focusedBorderColor = Color.Black,
+                    focusedLabelColor = Color.Black,
+                    unfocusedLabelColor = Color.Black,
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.Black
                 ),
                 textStyle = TextStyle(
                     fontSize = 20.sp
-                )
+                ),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number
+                ),
+                singleLine = true
             )
 
             Spacer(Modifier.height(10.dp))
 
             Button(
                 onClick = {
-                    viewModel.signupWithOTP()
+                    viewModel.signupVerify()
                 },
-                enabled = !signupState.isLoading!!,
+                enabled = !signupVerifyState.isLoading!!,
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .height(50.dp),
@@ -114,6 +123,16 @@ fun SignupVerifyScreen(){
             }
 
             Spacer(Modifier.height(30.dp))
+
+            signupVerifyState.message?.let {
+                Text(it, color = Color.Red, fontSize = 20.sp)
+            }
+
+            val context = LocalContext.current
+            if(signupVerifyState.action==true){
+                Toast.makeText(context, "Verification Successful", Toast.LENGTH_SHORT).show()
+                navController.navigate("home")
+            }
 
         }
 

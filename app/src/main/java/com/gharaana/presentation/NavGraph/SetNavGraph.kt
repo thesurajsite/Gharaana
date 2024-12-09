@@ -38,10 +38,10 @@ fun SetNavGraph(){
 //         ProfileScreen()
 //     }
 
-     composable(route = "user_signup_detail"){
-         val signupViewModel: SignupViewModel = viewModel()
-         UserSignupDetailsScreen(navController)
-     }
+//     composable(route = "user_signup_detail"){
+//         val signupViewModel: SignupViewModel = viewModel()
+//         UserSignupDetailsScreen(navController)
+//     }
 
 //     composable(route= Routes.SignupVerifyScreen.routes){
 //        SignupVerifyScreen()
