@@ -25,6 +25,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -55,6 +56,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.gharaana.R
 import com.gharaana.presentation.components.AutoSlidingCarousel
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -63,7 +65,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 
 @OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
 
     var searchText by remember { mutableStateOf("") }
 
@@ -410,9 +412,9 @@ fun HomeScreen() {
 }
 
 
-
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenPreview(){
-    HomeScreen()
-}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun HomeScreenPreview(){
+//    HomeScreen()
+//}

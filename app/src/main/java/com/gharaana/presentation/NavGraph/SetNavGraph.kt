@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.gharaana.Authentication.UserSignup.SignupVerifyScreen
 import com.gharaana.Authentication.UserSignup.SignupViewModel
 import com.gharaana.Authentication.UserSignup.UserSignupDetailsScreen
 import com.gharaana.presentation.Inbox.Inbox
@@ -41,6 +42,15 @@ fun SetNavGraph(){
          val signupViewModel: SignupViewModel = viewModel()
          UserSignupDetailsScreen(navController)
      }
+
+//     composable(route= Routes.SignupVerifyScreen.routes){
+//        SignupVerifyScreen()
+//     }
+
+
+
+
+
  }
 
 }

@@ -1,5 +1,7 @@
 package com.gharaana.presentation.NavGraph
 
+import okhttp3.Route
+
 sealed class Routes(val routes: String) {
 
     object Home : Routes("home")
@@ -10,6 +12,7 @@ sealed class Routes(val routes: String) {
     object BottomNavScreen:Routes("bottom_nav_screen")
 
     object UserSignupDetailsScreen:Routes("user_signup_detail")
-
+   // object SignupVerifyScreen: Routes("signup_verify")
+   // object NewScreen: Routes("new_screen")
 
 }

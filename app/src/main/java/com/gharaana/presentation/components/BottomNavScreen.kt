@@ -33,6 +33,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.gharaana.Authentication.UserSignup.SignupService
+import com.gharaana.Authentication.UserSignup.SignupVerifyScreen
 import com.gharaana.Authentication.UserSignup.SignupViewModel
 import com.gharaana.Authentication.UserSignup.UserSignupDetailsScreen
 import com.gharaana.Utils.ItemsList
@@ -97,7 +98,7 @@ fun BottomNavScreen(navController: NavController) {
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(route = Routes.Home.routes) {
-                HomeScreen()
+                HomeScreen(navController)
             }
             composable(route = Routes.Inbox.routes) {
                 Inbox()
@@ -105,9 +106,15 @@ fun BottomNavScreen(navController: NavController) {
             composable(route = Routes.ShoppingCart.routes) {
                 ShoppingCart()
             }
+
             composable(route = Routes.Profile.routes) {
                 UserSignupDetailsScreen(navController)
             }
+
+            composable(route = "signup_verify") {
+                SignupVerifyScreen()
+            }
+
         }
     }
 }

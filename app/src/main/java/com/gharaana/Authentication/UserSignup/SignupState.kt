@@ -7,6 +7,6 @@ data class SignupState(
     val email: String?="",
     val location: String?="",
     val isLoading: Boolean?=false,
-    val isOtpSent: Boolean?=false,
+    val accountCreated: Boolean?=false,
     val message: String?=""
 )

@@ -8,7 +8,7 @@ interface SignupService {
 
     @POST("customer/signup")
     suspend fun signupWithOtp(
-        @Body customerSignUpRequest: SignupDataRequestClass
+        @Body customerSignUpRequest: SignupRequestDataClass
     ): Response<SignupResponseDataClass>
 
 }

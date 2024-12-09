@@ -36,24 +36,24 @@ class SignupViewModel(private val signupService: SignupService): ViewModel() {
             _signupState.update { it.copy(isLoading = true) }
 
             try {
-                val request = SignupDataRequestClass(customerName = currentState.customerName, phoneNo = currentState.phoneNo, email = "thesurajsite@gmail.com", location = "BANGALORE" )
+                val request = SignupRequestDataClass(customerName = currentState.customerName, phoneNo = currentState.phoneNo, email = "thesurajsite@gmail.com", location = "BANGALORE" )
                 val response = signupService.signupWithOtp(request)
 
                 if(response.isSuccessful){
                     val signupResponse = response.body()
                     _signupState.update {
                         it.copy(
-                            isOtpSent = signupResponse?.accountCreated?:false,
+                            accountCreated = signupResponse?.accountCreated?:false,
                             isLoading = false,
                             message = signupResponse!!.response
                         )
                     }
-                    Log.d("apicall","${signupResponse}")
+                    Log.d("SignupAPI","${signupResponse}")
                 }
                 else{
                     _signupState.update {
                         it.copy(
-                        isOtpSent = false,
+                        accountCreated = false,
                         isLoading = false,
                         message = "Signup Failed"
                     ) }
@@ -62,12 +62,12 @@ class SignupViewModel(private val signupService: SignupService): ViewModel() {
             catch(e: Exception){
                 _signupState.update {
                     it.copy(
-                        isOtpSent = false,
+                        accountCreated = false,
                         isLoading = false,
                         message = "Some Error Occured"
                     )
                 }
-                Log.d("SignAPI",e.localizedMessage!!)
+                Log.d("SignupAPI",e.localizedMessage!!)
             }
         }
     }
