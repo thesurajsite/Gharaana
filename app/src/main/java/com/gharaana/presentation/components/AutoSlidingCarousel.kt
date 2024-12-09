@@ -22,8 +22,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.gharaana.R
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
@@ -97,7 +99,7 @@ fun DotsIndicator(
     modifier: Modifier = Modifier,
     totalDots: Int,
     selectedIndex: Int,
-    selectedColor: Color = Color.Red /* Color.Yellow */,
+    selectedColor: Color = colorResource(id = R.color.orange) /* Color.Yellow */,
     unSelectedColor: Color = Color.White /* Color.Gray */,
     dotSize: Dp
 ) {

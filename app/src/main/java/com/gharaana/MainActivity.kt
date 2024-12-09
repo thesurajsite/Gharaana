@@ -6,6 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.gharaana.Authentication.UserSignup.RetrofitInstance
+import com.gharaana.Authentication.UserSignup.SignupViewModel
+import com.gharaana.Authentication.UserSignup.SignupViewModelFactory
 import com.gharaana.presentation.NavGraph.SetNavGraph
 import com.gharaana.presentation.components.BottomNavScreen
 
@@ -14,7 +18,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-              SetNavGraph()
+
+            SetNavGraph()
         }
     }
 }
