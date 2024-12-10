@@ -11,6 +11,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MonotonicFrameClock
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,10 +31,12 @@ fun ProfileScreen(navController: NavController) {
 
     val context = LocalContext.current
     val sharedPreferences = SharedPreferences(context)
-    val token = sharedPreferences.getUserToken()
 
-    if(token!!.isEmpty()){
-        navController.navigate(Routes.UserSignupDetailsScreen.routes)
+    LaunchedEffect(Unit) {
+        val token = sharedPreferences.getUserToken()
+        if (token.isNullOrEmpty()) {
+            navController.navigate(Routes.UserSignupDetailsScreen.routes)
+        }
     }
 
     Column(modifier = Modifier.fillMaxSize(),

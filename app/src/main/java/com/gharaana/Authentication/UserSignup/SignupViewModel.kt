@@ -2,7 +2,6 @@ package com.gharaana.Authentication.UserSignup
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gharaana.SharedPreferences
@@ -11,7 +10,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlin.math.sign
 
 class SignupViewModel(private val signupService: SignupService): ViewModel() {
 
