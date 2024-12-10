@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.gharaana.R
+import com.gharaana.SharedPreferences
 import com.gharaana.presentation.NavGraph.Routes
 import kotlin.math.sin
 
@@ -49,7 +50,7 @@ fun SignupVerifyScreen(navController: NavController, viewModel: SignupViewModel)
 //    // Created the ViewModel using the ViewModelFactory
 //    val viewModel: SignupViewModel = viewModel(factory = SignupViewModelFactory(signupService))
     val signupVerifyState by viewModel.signupVerifyState.collectAsState()
-
+    val context = LocalContext.current
 
     Scaffold(modifier = Modifier.fillMaxSize())
     {
@@ -110,7 +111,7 @@ fun SignupVerifyScreen(navController: NavController, viewModel: SignupViewModel)
 
             Button(
                 onClick = {
-                    viewModel.signupVerify()
+                    viewModel.signupVerify(context)
                 },
                 enabled = !signupVerifyState.isLoading!!,
                 modifier = Modifier

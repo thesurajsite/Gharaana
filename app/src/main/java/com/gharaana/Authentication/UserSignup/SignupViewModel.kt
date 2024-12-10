@@ -1,9 +1,11 @@
 package com.gharaana.Authentication.UserSignup
 
+import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gharaana.SharedPreferences
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,6 +14,8 @@ import kotlinx.coroutines.launch
 import kotlin.math.sign
 
 class SignupViewModel(private val signupService: SignupService): ViewModel() {
+
+    private lateinit var sharedPreferences: SharedPreferences
 
     private val _signupState = MutableStateFlow(SignupState())
     val signupState : StateFlow<SignupState> = _signupState.asStateFlow()
@@ -25,6 +29,10 @@ class SignupViewModel(private val signupService: SignupService): ViewModel() {
 
     fun updateCustomerName(customerName: String){
         _signupState.update { it.copy(customerName = customerName) }  // From Signup DataClass
+    }
+
+    fun updateAccountCreated(boolean: Boolean){
+        _signupState.update { it.copy(accountCreated = boolean) }
     }
 
     fun updateOtp(otp: String){
@@ -88,10 +96,11 @@ class SignupViewModel(private val signupService: SignupService): ViewModel() {
     }
 
 
-    fun signupVerify(){
+    fun signupVerify(context: Context){
 
-        val currentState2 = _signupState.value
-        Log.d("SignupVerify", "${currentState2.customerName}, ${currentState2.phoneNo}, ${currentState2.email}, ${currentState2.location}, ${currentState2.location}")
+        sharedPreferences = SharedPreferences(context)
+        //val currentState2 = _signupState.value
+        //Log.d("SignupVerify", "${currentState2.customerName}, ${currentState2.phoneNo}, ${currentState2.email}, ${currentState2.location}, ${currentState2.location}")
 
 
         // Copied the customer Data from Previous state
@@ -114,7 +123,7 @@ class SignupViewModel(private val signupService: SignupService): ViewModel() {
 
             _signupVerifyState.update { it.copy(isLoading = true) }
 
-            Log.d("SignupVerify", "${currentState.customerName}, ${currentState.phoneNo}, ${currentState.email}, ${currentState.location}, ${currentState.otp}")
+            //Log.d("SignupVerify", "${currentState.customerName}, ${currentState.phoneNo}, ${currentState.email}, ${currentState.location}, ${currentState.otp}")
 
             try {
                 val request = SignupVerifyRequest(
@@ -139,6 +148,8 @@ class SignupViewModel(private val signupService: SignupService): ViewModel() {
 
                     // action response can be true or false based on that frame the message
                     if(_signupVerifyState.value.action == true){
+                        // update token
+                        sharedPreferences.updateUserToken(_signupVerifyState.value.token!!)
                         _signupVerifyState.update { it.copy(message = "Verification completed") }
                     }
                     else{

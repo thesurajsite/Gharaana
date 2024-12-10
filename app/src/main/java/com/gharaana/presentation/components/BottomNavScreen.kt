@@ -109,18 +109,24 @@ fun BottomNavScreen(navController: NavController) {
             composable(route = Routes.Home.routes) {
                 HomeScreen(navController)
             }
+
             composable(route = Routes.Inbox.routes) {
                 Inbox()
             }
+
             composable(route = Routes.ShoppingCart.routes) {
                 ShoppingCart()
             }
 
             composable(route = Routes.Profile.routes) {
+                ProfileScreen(navController)
+            }
+
+            composable(route = Routes.UserSignupDetailsScreen.routes) {
                 UserSignupDetailsScreen(navController, signupViewModel)
             }
 
-            composable(route = "signup_verify") {
+            composable(route = Routes.SignupVerifyScreen.routes) {
                 SignupVerifyScreen(navController, signupViewModel)
             }
 
