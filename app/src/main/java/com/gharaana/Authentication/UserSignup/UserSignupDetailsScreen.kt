@@ -175,6 +175,7 @@ fun UserSignupDetailsScreen(navController: NavController, viewModel: SignupViewM
             val context = LocalContext.current
             LaunchedEffect(signupState.accountCreated) {
                 if(signupState.accountCreated!!){
+                    viewModel.updateAccountCreated(false)
                     Toast.makeText(context, "OTP Sent", Toast.LENGTH_SHORT).show()
                     navController.navigate("signup_verify")
                 }
