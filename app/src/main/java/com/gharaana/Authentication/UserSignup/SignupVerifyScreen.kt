@@ -20,6 +20,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -122,10 +123,12 @@ fun SignupVerifyScreen(navController: NavController, viewModel: SignupViewModel)
             }
 
             val context = LocalContext.current
-            if(signupVerifyState.action==true){
-                Toast.makeText(context, "Verification Successful", Toast.LENGTH_SHORT).show()
-                navController.navigate("home")
-                viewModel.updateSignupVerifyAction(false)
+            LaunchedEffect(signupVerifyState.action) {
+                if(signupVerifyState.action==true){
+                    Toast.makeText(context, "Verification Successful", Toast.LENGTH_SHORT).show()
+                    navController.navigate("home")
+                    viewModel.updateSignupVerifyAction(false)
+                }
             }
 
         }
