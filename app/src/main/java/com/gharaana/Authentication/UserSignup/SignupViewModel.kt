@@ -101,18 +101,18 @@ class SignupViewModel(private val retrofitService: RetrofitService): ViewModel()
         //val currentState2 = _signupState.value
         //Log.d("SignupVerify", "${currentState2.customerName}, ${currentState2.phoneNo}, ${currentState2.email}, ${currentState2.location}, ${currentState2.location}")
 
-
-        // Copied the customer Data from Previous state
-        _signupVerifyState.update {
-            it.copy(
-                phoneNo = _signupState.value.phoneNo,
-                customerName = _signupState.value.customerName,
-                email = _signupState.value.email,
-                location = _signupState.value.location
-            )
-        }
-
         viewModelScope.launch {
+
+            // Copied the customer Data from Previous state
+            _signupVerifyState.update {
+                it.copy(
+                    phoneNo = _signupState.value.phoneNo,
+                    customerName = _signupState.value.customerName,
+                    email = _signupState.value.email,
+                    location = _signupState.value.location
+                )
+            }
+
             val currentState = _signupVerifyState.value
 
             if(currentState.otp!!.isEmpty()){

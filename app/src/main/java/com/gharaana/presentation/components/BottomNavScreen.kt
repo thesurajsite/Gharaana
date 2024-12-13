@@ -134,11 +134,8 @@ fun BottomNavScreen(navController: NavController) {
             }
 
             composable(route = Routes.LoginVerifyScreen.routes){
-                LoginVerifyScreen()
+                LoginVerifyScreen(navController, loginViewModel)
             }
-
-
-
         }
     }
 }

@@ -20,6 +20,8 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,10 +35,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.gharaana.R
+import com.gharaana.presentation.NavGraph.Routes
 
 @Composable
-fun LoginVerifyScreen(){
+fun LoginVerifyScreen(navController: NavController, viewModel: LoginViewModel){
+
+    val loginVerifyState by viewModel.loginVerifyState.collectAsState()
+    val context = LocalContext.current
 
     Scaffold(modifier = Modifier.fillMaxSize())
     {
@@ -70,8 +77,8 @@ fun LoginVerifyScreen(){
             Spacer(Modifier.height(10.dp))
 
             OutlinedTextField(
-                value = "",
-                onValueChange = { "" },
+                value = loginVerifyState.otp!!,
+                onValueChange = { viewModel.updateOtp(it) },
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .height(60.dp),
@@ -97,9 +104,9 @@ fun LoginVerifyScreen(){
 
             Button(
                 onClick = {
-                    //viewModel.signupVerify(context)
+                    viewModel.loginVerify(context)
                 },
-                //enabled = !signupVerifyState.isLoading!!,
+                enabled = !loginVerifyState.isLoading!!,
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .height(50.dp),
@@ -111,15 +118,15 @@ fun LoginVerifyScreen(){
 
             Spacer(Modifier.height(30.dp))
 
-//            signupVerifyState.message?.let {
-//                Text(it, color = Color.Red, fontSize = 20.sp)
-//            }
+            loginVerifyState.message?.let {
+                Text(it, color = Color.Red, fontSize = 20.sp)
+            }
 
-//            val context = LocalContext.current
-//            if(signupVerifyState.action==true){
-//                Toast.makeText(context, "Verification Successful", Toast.LENGTH_SHORT).show()
-//                navController.navigate("home")
-//            }
+            val context = LocalContext.current
+            if(loginVerifyState.status==true){
+                Toast.makeText(context, "Verification Successful", Toast.LENGTH_SHORT).show()
+                navController.navigate(Routes.Home.routes)
+            }
 
         }
 

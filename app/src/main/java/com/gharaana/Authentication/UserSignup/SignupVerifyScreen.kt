@@ -41,7 +41,7 @@ import com.gharaana.R
 @Composable
 fun SignupVerifyScreen(navController: NavController, viewModel: SignupViewModel){
 
-val signupVerifyState by viewModel.signupVerifyState.collectAsState()
+    val signupVerifyState by viewModel.signupVerifyState.collectAsState()
     val context = LocalContext.current
 
     Scaffold(modifier = Modifier.fillMaxSize())
