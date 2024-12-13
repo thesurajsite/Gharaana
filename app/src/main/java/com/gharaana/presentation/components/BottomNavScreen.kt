@@ -28,6 +28,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.gharaana.Authentication.UserLogin.LoginScreen
+import com.gharaana.Authentication.UserLogin.LoginViewModel
+import com.gharaana.Authentication.UserLogin.LoginViewModelFactory
 import com.gharaana.Authentication.UserSignup.SignupScreen
 import com.gharaana.Retrofit.RetrofitInstance
 import com.gharaana.Authentication.UserSignup.SignupVerifyScreen
@@ -49,10 +51,10 @@ fun BottomNavScreen(navController: NavController) {
     val navController = rememberNavController()
     val openDialog = remember { mutableStateOf(false) }
 
-    val signupService = RetrofitInstance.signupService
+    val retrofitService = RetrofitInstance.signupService
     // Created the ViewModel using the ViewModelFactory
-    val signupViewModel: SignupViewModel = viewModel(factory = SignupViewModelFactory(signupService))
-
+    val signupViewModel: SignupViewModel = viewModel(factory = SignupViewModelFactory(retrofitService))
+    val loginViewModel : LoginViewModel = viewModel(factory = LoginViewModelFactory(retrofitService))
 
     Scaffold(
         bottomBar = {
