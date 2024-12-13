@@ -1,7 +1,5 @@
 package com.gharaana.presentation.profile
 
-import android.content.Context
-import android.graphics.drawable.shapes.Shape
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,8 +32,8 @@ fun ProfileScreen(navController: NavController) {
 
     LaunchedEffect(Unit) {
         val token = sharedPreferences.getUserToken()
-        if (token.isNullOrEmpty()) {
-            navController.navigate(Routes.UserSignupDetailsScreen.routes)
+        if (token.isNullOrEmpty() || token=="") {
+            navController.navigate(Routes.LoginScreen.routes)
         }
     }
 
@@ -48,17 +46,13 @@ fun ProfileScreen(navController: NavController) {
                 sharedPreferences.updateUserToken("")
                 navController.navigate(Routes.Home.routes)
             },
-            modifier = Modifier.fillMaxWidth(0.9f).height(60.dp),
+            modifier = Modifier
+                .fillMaxWidth(0.9f)
+                .height(60.dp),
             shape = RectangleShape,
             colors = ButtonDefaults.buttonColors(Color.Red)
         ){
             Text("LOGOUT", fontSize = 20.sp)
         }
     }
-
-
-
 }
-
-
-

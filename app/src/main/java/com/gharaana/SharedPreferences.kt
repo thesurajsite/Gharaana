@@ -17,7 +17,7 @@ class SharedPreferences(private val context: Context): MyInterface {
     override fun updateUserToken(token: String){
         val pref : SharedPreferences =  getSharedPreferences("GHARAANA", Context.MODE_PRIVATE)
         val editor = pref.edit()
-        editor.putString("userToken", "token")
+        editor.putString("userToken", token)
         editor.apply()
     }
 }

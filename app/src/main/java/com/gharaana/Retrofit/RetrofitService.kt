@@ -1,10 +1,14 @@
-package com.gharaana.Authentication.UserSignup
+package com.gharaana.Retrofit
 
+import com.gharaana.Authentication.UserSignup.SignupRequestDataClass
+import com.gharaana.Authentication.UserSignup.SignupResponseDataClass
+import com.gharaana.Authentication.UserSignup.SignupVerifyRequest
+import com.gharaana.Authentication.UserSignup.SignupVerifyResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface SignupService {
+interface RetrofitService {
 
     @POST("customer/signup")
     suspend fun signupWithOtp(

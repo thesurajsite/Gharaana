@@ -1,4 +1,4 @@
-package com.gharaana.Authentication.UserSignup
+package com.gharaana.Retrofit
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -21,5 +21,5 @@ object RetrofitInstance {
         .addConverterFactory(GsonConverterFactory.create()) // Add your converter here (Gson, Moshi, etc.)
         .build()
 
-    val signupService: SignupService = retrofit.create(SignupService::class.java)
+    val signupService: RetrofitService = retrofit.create(RetrofitService::class.java)
 }

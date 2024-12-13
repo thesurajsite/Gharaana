@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gharaana.Retrofit.RetrofitService
 import com.gharaana.SharedPreferences
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,7 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class SignupViewModel(private val signupService: SignupService): ViewModel() {
+class SignupViewModel(private val retrofitService: RetrofitService): ViewModel() {
 
     private lateinit var sharedPreferences: SharedPreferences
 
@@ -58,7 +59,7 @@ class SignupViewModel(private val signupService: SignupService): ViewModel() {
 
             try {
                 val request = SignupRequestDataClass(customerName = currentState.customerName, phoneNo = currentState.phoneNo, email = currentState.email, location = currentState.location )
-                val response = signupService.signupWithOtp(request)
+                val response = retrofitService.signupWithOtp(request)
 
                 if(response.isSuccessful){
                     val signupResponse = response.body()
@@ -131,7 +132,7 @@ class SignupViewModel(private val signupService: SignupService): ViewModel() {
                     location = currentState.location,
                     otp = currentState.otp
                 )
-                val response = signupService.signupVerify(request)
+                val response = retrofitService.signupVerify(request)
 
                 if(response.isSuccessful){
                     val verifyResponse = response.body()

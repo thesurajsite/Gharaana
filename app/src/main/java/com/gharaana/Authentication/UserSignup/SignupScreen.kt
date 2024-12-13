@@ -1,6 +1,5 @@
 package com.gharaana.Authentication.UserSignup
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,6 +19,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -39,9 +39,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.gharaana.R
+import com.gharaana.presentation.NavGraph.Routes
 
 @Composable
-fun UserSignupDetailsScreen(navController: NavController, viewModel: SignupViewModel){
+fun SignupScreen(navController: NavController, viewModel: SignupViewModel){
 
 //    val signupService = RetrofitInstance.signupService
 //    // Created the ViewModel using the ViewModelFactory
@@ -152,12 +153,22 @@ fun UserSignupDetailsScreen(navController: NavController, viewModel: SignupViewM
                 Text(it, color = Color.Red, fontSize = 20.sp)
             }
 
+            Spacer(Modifier.height(10.dp))
+
+            TextButton(
+                onClick = {
+                    navController.navigate(Routes.LoginScreen.routes)
+                }
+            ) {
+                Text("Already Have an Account? Login Here", color = Color.Black)
+            }
+
             val context = LocalContext.current
             LaunchedEffect(signupState.accountCreated) {
                 if(signupState.accountCreated!!){
                     viewModel.updateAccountCreated(false)
                     Toast.makeText(context, "OTP Sent", Toast.LENGTH_SHORT).show()
-                    navController.navigate("signup_verify")
+                    navController.navigate(Routes.SignupVerifyScreen.routes)
                 }
             }
 

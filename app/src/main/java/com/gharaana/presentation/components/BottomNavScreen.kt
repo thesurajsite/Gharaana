@@ -27,11 +27,12 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.gharaana.Authentication.UserSignup.RetrofitInstance
+import com.gharaana.Authentication.UserLogin.LoginScreen
+import com.gharaana.Authentication.UserSignup.SignupScreen
+import com.gharaana.Retrofit.RetrofitInstance
 import com.gharaana.Authentication.UserSignup.SignupVerifyScreen
 import com.gharaana.Authentication.UserSignup.SignupViewModel
 import com.gharaana.Authentication.UserSignup.SignupViewModelFactory
-import com.gharaana.Authentication.UserSignup.UserSignupDetailsScreen
 import com.gharaana.Utils.ItemsList
 import com.gharaana.presentation.Inbox.Inbox
 import com.gharaana.presentation.NavGraph.Routes
@@ -116,13 +117,19 @@ fun BottomNavScreen(navController: NavController) {
                 ProfileScreen(navController)
             }
 
-            composable(route = Routes.UserSignupDetailsScreen.routes) {
-                UserSignupDetailsScreen(navController, signupViewModel)
+            composable(route = Routes.SignupScreen.routes) {
+                SignupScreen(navController, signupViewModel)
             }
 
             composable(route = Routes.SignupVerifyScreen.routes) {
                 SignupVerifyScreen(navController, signupViewModel)
             }
+
+            composable(route = Routes.LoginScreen.routes) {
+                LoginScreen(navController)
+            }
+
+
 
         }
     }
