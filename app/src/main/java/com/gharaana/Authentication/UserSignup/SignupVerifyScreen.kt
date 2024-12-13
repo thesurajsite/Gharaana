@@ -35,20 +35,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.gharaana.R
-import com.gharaana.SharedPreferences
-import com.gharaana.presentation.NavGraph.Routes
-import kotlin.math.sin
-
 
 @Composable
 fun SignupVerifyScreen(navController: NavController, viewModel: SignupViewModel){
 
-//    val signupService = RetrofitInstance.signupService
-//    // Created the ViewModel using the ViewModelFactory
-//    val viewModel: SignupViewModel = viewModel(factory = SignupViewModelFactory(signupService))
     val signupVerifyState by viewModel.signupVerifyState.collectAsState()
     val context = LocalContext.current
 

@@ -6,13 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.gharaana.Authentication.UserSignup.SignupVerifyScreen
-import com.gharaana.Authentication.UserSignup.SignupViewModel
-import com.gharaana.Authentication.UserSignup.UserSignupDetailsScreen
-import com.gharaana.presentation.Inbox.Inbox
-import com.gharaana.presentation.ShoppingCart.ShoppingCart
 import com.gharaana.presentation.components.BottomNavScreen
-import com.gharaana.presentation.profile.ProfileScreen
 
 @Composable
 fun SetNavGraph(){

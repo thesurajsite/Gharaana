@@ -77,17 +77,9 @@ fun HomeScreen(navController: NavController) {
     val imagesCarousel1 = listOf(
         R.drawable.a,
         R.drawable.b,
-        R.drawable.c,
-        R.drawable.d,
-        R.drawable.e,
-    )
-
-    val imagesCarousel2 = listOf(
         R.drawable.a,
         R.drawable.b,
-        R.drawable.c,
-        R.drawable.d,
-        R.drawable.e,
+        R.drawable.a,
     )
 
     val frequentlyUsedServices = listOf(
@@ -107,7 +99,8 @@ fun HomeScreen(navController: NavController) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
+                .verticalScroll(rememberScrollState())
+                .padding(padding),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         )

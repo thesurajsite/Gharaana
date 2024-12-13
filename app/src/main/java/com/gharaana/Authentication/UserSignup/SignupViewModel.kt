@@ -2,18 +2,17 @@ package com.gharaana.Authentication.UserSignup
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gharaana.Retrofit.RetrofitService
 import com.gharaana.SharedPreferences
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlin.math.sign
 
-class SignupViewModel(private val signupService: SignupService): ViewModel() {
+class SignupViewModel(private val retrofitService: RetrofitService): ViewModel() {
 
     private lateinit var sharedPreferences: SharedPreferences
 
@@ -42,7 +41,7 @@ class SignupViewModel(private val signupService: SignupService): ViewModel() {
     fun signupWithOTP(){
         viewModelScope.launch {
 
-            // TO BE EDITED LATER ON
+            // TO BE EDITED LATER ON, Remove the HardCoded email and Address
             _signupState.update { it.copy(
                 email = "thesurajsite@gmail.com",
                 location = "BANGALORE"
@@ -60,7 +59,7 @@ class SignupViewModel(private val signupService: SignupService): ViewModel() {
 
             try {
                 val request = SignupRequestDataClass(customerName = currentState.customerName, phoneNo = currentState.phoneNo, email = currentState.email, location = currentState.location )
-                val response = signupService.signupWithOtp(request)
+                val response = retrofitService.signupWithOtp(request)
 
                 if(response.isSuccessful){
                     val signupResponse = response.body()
@@ -102,18 +101,18 @@ class SignupViewModel(private val signupService: SignupService): ViewModel() {
         //val currentState2 = _signupState.value
         //Log.d("SignupVerify", "${currentState2.customerName}, ${currentState2.phoneNo}, ${currentState2.email}, ${currentState2.location}, ${currentState2.location}")
 
-
-        // Copied the customer Data from Previous state
-        _signupVerifyState.update {
-            it.copy(
-                phoneNo = _signupState.value.phoneNo,
-                customerName = _signupState.value.customerName,
-                email = _signupState.value.email,
-                location = _signupState.value.location
-            )
-        }
-
         viewModelScope.launch {
+
+            // Copied the customer Data from Previous state
+            _signupVerifyState.update {
+                it.copy(
+                    phoneNo = _signupState.value.phoneNo,
+                    customerName = _signupState.value.customerName,
+                    email = _signupState.value.email,
+                    location = _signupState.value.location
+                )
+            }
+
             val currentState = _signupVerifyState.value
 
             if(currentState.otp!!.isEmpty()){
@@ -133,7 +132,7 @@ class SignupViewModel(private val signupService: SignupService): ViewModel() {
                     location = currentState.location,
                     otp = currentState.otp
                 )
-                val response = signupService.signupVerify(request)
+                val response = retrofitService.signupVerify(request)
 
                 if(response.isSuccessful){
                     val verifyResponse = response.body()

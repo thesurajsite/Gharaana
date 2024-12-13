@@ -1,7 +1,5 @@
 package com.gharaana.presentation.profile
 
-import android.content.Context
-import android.graphics.drawable.shapes.Shape
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,6 +9,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MonotonicFrameClock
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,10 +29,12 @@ fun ProfileScreen(navController: NavController) {
 
     val context = LocalContext.current
     val sharedPreferences = SharedPreferences(context)
-    val token = sharedPreferences.getUserToken()
 
-    if(token!!.isEmpty()){
-        navController.navigate(Routes.UserSignupDetailsScreen.routes)
+    LaunchedEffect(Unit) {
+        val token = sharedPreferences.getUserToken()
+        if (token.isNullOrEmpty() || token=="") {
+            navController.navigate(Routes.LoginScreen.routes)
+        }
     }
 
     Column(modifier = Modifier.fillMaxSize(),
@@ -45,17 +46,13 @@ fun ProfileScreen(navController: NavController) {
                 sharedPreferences.updateUserToken("")
                 navController.navigate(Routes.Home.routes)
             },
-            modifier = Modifier.fillMaxWidth(0.9f).height(60.dp),
+            modifier = Modifier
+                .fillMaxWidth(0.9f)
+                .height(60.dp),
             shape = RectangleShape,
             colors = ButtonDefaults.buttonColors(Color.Red)
         ){
             Text("LOGOUT", fontSize = 20.sp)
         }
     }
-
-
-
 }
-
-
-

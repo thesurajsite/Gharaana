@@ -11,7 +11,9 @@ sealed class Routes(val routes: String) {
     object Profile :Routes("profile")
     object BottomNavScreen:Routes("bottom_nav_screen")
 
-    object UserSignupDetailsScreen:Routes("user_signup_detail")
+    object SignupScreen:Routes("signup_screen")
     object SignupVerifyScreen: Routes("signup_verify")
+    object LoginScreen: Routes("login_screen")
+    object LoginVerifyScreen: Routes("login_verify")
 
 }
