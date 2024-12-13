@@ -1,4 +1,4 @@
-package com.gharaana.Authentication.UserSignup
+package com.gharaana.Authentication.UserLogin
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -13,17 +13,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,19 +33,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.gharaana.R
-import com.gharaana.presentation.NavGraph.Routes
 
 @Composable
-fun SignupScreen(navController: NavController, viewModel: SignupViewModel){
-
-    val signupState by viewModel.signupState.collectAsState()
+fun LoginVerifyScreen(){
 
     Scaffold(modifier = Modifier.fillMaxSize())
     {
-        padding->
-
+            padding->
 
         Column(modifier = Modifier
             .fillMaxWidth()
@@ -61,7 +52,7 @@ fun SignupScreen(navController: NavController, viewModel: SignupViewModel){
         ) {
 
             Image(
-                painter = painterResource(R.drawable.logo2),
+                painter = painterResource(R.drawable.otp),
                 contentDescription = "logo",
                 modifier = Modifier
                     .size(300.dp)
@@ -69,7 +60,7 @@ fun SignupScreen(navController: NavController, viewModel: SignupViewModel){
 
             Spacer(Modifier.height(30.dp))
 
-            Text(text = "Gharaana Signup",
+            Text(text = "Please Enter OTP",
                 color = Color.Black,
                 fontSize = 20.sp,
                 fontFamily = FontFamily.Serif,
@@ -79,36 +70,12 @@ fun SignupScreen(navController: NavController, viewModel: SignupViewModel){
             Spacer(Modifier.height(10.dp))
 
             OutlinedTextField(
-                value = signupState.customerName!!,
-                onValueChange = { viewModel.updateCustomerName(it) },
+                value = "",
+                onValueChange = { "" },
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .height(60.dp),
-                label = { Text("Name") },
-                colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = Color.Black, // White when not focused
-                    focusedBorderColor = Color.Black, // Primary color when focused
-                    focusedLabelColor = Color.Black, // Label color when focused
-                    unfocusedLabelColor = Color.Black, // Label color when not focused
-                    focusedTextColor = Color.Black, // Text color when focused
-                    unfocusedTextColor = Color.Black  // Text color when not focused
-                ),
-                textStyle = TextStyle(
-                    fontSize = 20.sp
-                ),
-                singleLine = true
-            )
-
-
-            Spacer(Modifier.height(10.dp))
-
-            OutlinedTextField(
-                value = signupState.phoneNo,
-                onValueChange = { viewModel.updatePhoneNo(it) },
-                modifier = Modifier
-                    .fillMaxWidth(0.9f)
-                    .height(60.dp),
-                label = { Text("Phone Number") },
+                label = { Text("Enter Verification Code") },
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedBorderColor = Color.Black,
                     focusedBorderColor = Color.Black,
@@ -118,8 +85,9 @@ fun SignupScreen(navController: NavController, viewModel: SignupViewModel){
                     unfocusedTextColor = Color.Black
                 ),
                 textStyle = TextStyle(
-                    fontSize = 20.sp,
-                ), keyboardOptions = KeyboardOptions.Default.copy(
+                    fontSize = 20.sp
+                ),
+                keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Number
                 ),
                 singleLine = true
@@ -129,53 +97,32 @@ fun SignupScreen(navController: NavController, viewModel: SignupViewModel){
 
             Button(
                 onClick = {
-                    viewModel.signupWithOTP()
+                    //viewModel.signupVerify(context)
                 },
-                enabled = !signupState.isLoading!!,
+                //enabled = !signupVerifyState.isLoading!!,
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .height(50.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
                 shape = RectangleShape,
             ) {
-                Text("Get Verification Code", fontSize = 20.sp)
+                Text("Verify", fontSize = 20.sp, color = Color.White)
             }
-
 
             Spacer(Modifier.height(30.dp))
 
+//            signupVerifyState.message?.let {
+//                Text(it, color = Color.Red, fontSize = 20.sp)
+//            }
 
-            signupState.message?.let {
-                Text(it, color = Color.Red, fontSize = 20.sp)
-            }
-
-            Spacer(Modifier.height(10.dp))
-
-            TextButton(
-                onClick = {
-                    navController.navigate(Routes.LoginScreen.routes)
-                }
-            ) {
-                Text("Already Have an Account? Login Here", color = Color.Black)
-            }
-
-            val context = LocalContext.current
-            LaunchedEffect(signupState.accountCreated) {
-                if(signupState.accountCreated!!){
-                    viewModel.updateAccountCreated(false)
-                    Toast.makeText(context, "OTP Sent", Toast.LENGTH_SHORT).show()
-                    navController.navigate(Routes.SignupVerifyScreen.routes)
-                }
-            }
+//            val context = LocalContext.current
+//            if(signupVerifyState.action==true){
+//                Toast.makeText(context, "Verification Successful", Toast.LENGTH_SHORT).show()
+//                navController.navigate("home")
+//            }
 
         }
 
     }
 
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun UserSignupPreview(){
-//    UserSignupDetailsScreen()
-//}

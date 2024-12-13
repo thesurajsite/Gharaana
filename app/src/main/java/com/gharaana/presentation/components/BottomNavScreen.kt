@@ -16,6 +16,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -28,6 +29,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.gharaana.Authentication.UserLogin.LoginScreen
+import com.gharaana.Authentication.UserLogin.LoginVerifyScreen
 import com.gharaana.Authentication.UserLogin.LoginViewModel
 import com.gharaana.Authentication.UserLogin.LoginViewModelFactory
 import com.gharaana.Authentication.UserSignup.SignupScreen
@@ -128,7 +130,11 @@ fun BottomNavScreen(navController: NavController) {
             }
 
             composable(route = Routes.LoginScreen.routes) {
-                LoginScreen(navController)
+                LoginScreen(navController, loginViewModel)
+            }
+
+            composable(route = Routes.LoginVerifyScreen.routes){
+                LoginVerifyScreen()
             }
 
 

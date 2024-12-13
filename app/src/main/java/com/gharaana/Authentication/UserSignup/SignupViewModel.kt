@@ -41,7 +41,7 @@ class SignupViewModel(private val retrofitService: RetrofitService): ViewModel()
     fun signupWithOTP(){
         viewModelScope.launch {
 
-            // TO BE EDITED LATER ON
+            // TO BE EDITED LATER ON, Remove the HardCoded email and Address
             _signupState.update { it.copy(
                 email = "thesurajsite@gmail.com",
                 location = "BANGALORE"

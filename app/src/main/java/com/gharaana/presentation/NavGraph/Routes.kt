@@ -14,5 +14,6 @@ sealed class Routes(val routes: String) {
     object SignupScreen:Routes("signup_screen")
     object SignupVerifyScreen: Routes("signup_verify")
     object LoginScreen: Routes("login_screen")
+    object LoginVerifyScreen: Routes("login_verify")
 
 }

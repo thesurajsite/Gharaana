@@ -22,6 +22,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,12 +42,13 @@ import com.gharaana.R
 import com.gharaana.presentation.NavGraph.Routes
 
 @Composable
-fun LoginScreen(navController: NavController){
+fun LoginScreen(navController: NavController, viewModel: LoginViewModel){
+
+    val loginState by viewModel.loginState.collectAsState()
 
     Scaffold(modifier = Modifier.fillMaxSize())
     {
             padding->
-
 
         Column(modifier = Modifier
             .fillMaxWidth()
@@ -76,8 +79,8 @@ fun LoginScreen(navController: NavController){
             Spacer(Modifier.height(10.dp))
 
             OutlinedTextField(
-                value = "",
-                onValueChange = { "" },
+                value = loginState.phoneNo!!,
+                onValueChange = { viewModel.updatePhoneNo(it) },
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .height(60.dp),
@@ -102,9 +105,9 @@ fun LoginScreen(navController: NavController){
 
             Button(
                 onClick = {
-                    // OnClick Listener
+                    viewModel.loginWithOtp()
                 },
-                //enabled = !signupState.isLoading!!,
+                enabled = !loginState.isLoading!!,
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .height(50.dp),
@@ -117,9 +120,9 @@ fun LoginScreen(navController: NavController){
 
             Spacer(Modifier.height(30.dp))
 
-            //            signupState.message?.let {
-//                Text(it, color = Color.Red, fontSize = 20.sp)
-//            }
+            loginState.message?.let {
+                Text(it, color = Color.Red, fontSize = 20.sp)
+            }
 
             Spacer(Modifier.height(10.dp))
 
@@ -132,15 +135,14 @@ fun LoginScreen(navController: NavController){
             }
 
 
-
-//            val context = LocalContext.current
-//            LaunchedEffect(signupState.accountCreated) {
-//                if(signupState.accountCreated!!){
-//                    viewModel.updateAccountCreated(false)
-//                    Toast.makeText(context, "OTP Sent", Toast.LENGTH_SHORT).show()
-//                    navController.navigate("signup_verify")
-//                }
-//            }
+            val context = LocalContext.current
+            LaunchedEffect(loginState.action) {
+                if(loginState.action!!){
+                    viewModel.updateAction(false)
+                    Toast.makeText(context, "OTP Sent", Toast.LENGTH_SHORT).show()
+                    navController.navigate(Routes.LoginVerifyScreen.routes)
+                }
+            }
 
         }
 
