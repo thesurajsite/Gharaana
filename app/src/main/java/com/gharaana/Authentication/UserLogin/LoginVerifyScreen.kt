@@ -126,6 +126,7 @@ fun LoginVerifyScreen(navController: NavController, viewModel: LoginViewModel){
             if(loginVerifyState.status==true){
                 Toast.makeText(context, "Verification Successful", Toast.LENGTH_SHORT).show()
                 navController.navigate(Routes.Home.routes)
+                viewModel.updateLoginVerifyStatus(false)
             }
 
         }

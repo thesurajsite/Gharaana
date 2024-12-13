@@ -38,6 +38,10 @@ class SignupViewModel(private val retrofitService: RetrofitService): ViewModel()
         _signupVerifyState.update { it.copy( otp = otp) }  // From SignupVerify DataClass
     }
 
+    fun updateSignupVerifyAction(action: Boolean){
+        _signupVerifyState.update { it.copy(action = action) }
+    }
+
     fun signupWithOTP(){
         viewModelScope.launch {
 

@@ -125,6 +125,7 @@ fun SignupVerifyScreen(navController: NavController, viewModel: SignupViewModel)
             if(signupVerifyState.action==true){
                 Toast.makeText(context, "Verification Successful", Toast.LENGTH_SHORT).show()
                 navController.navigate("home")
+                viewModel.updateSignupVerifyAction(false)
             }
 
         }

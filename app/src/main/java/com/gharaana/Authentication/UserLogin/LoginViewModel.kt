@@ -35,6 +35,10 @@ class LoginViewModel(private val retrofitService: RetrofitService): ViewModel() 
         _loginVerifyState.update { it.copy(otp = otp) }
     }
 
+    fun updateLoginVerifyStatus(status: Boolean){
+        _loginVerifyState.update { it.copy(status = status) }
+    }
+
     fun loginWithOtp(){
         viewModelScope.launch {
 
