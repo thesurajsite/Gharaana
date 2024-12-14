@@ -17,33 +17,6 @@ fun SetNavGraph(){
      composable(route = "bottom_nav_screen"){
          BottomNavScreen(navController)
      }
-//     composable(route = Routes.Home.routes){
-//
-//      HomeScreen(navController)
-//     }
-//
-//     composable(route = Routes.Inbox.routes){
-//         Inbox()
-//     }
-//     composable(route = Routes.ShoppingCart.routes){
-//         ShoppingCart()
-//     }
-//     composable(route = Routes.Profile.routes){
-//         ProfileScreen()
-//     }
-
-//     composable(route = "user_signup_detail"){
-//         val signupViewModel: SignupViewModel = viewModel()
-//         UserSignupDetailsScreen(navController)
-//     }
-
-//     composable(route= Routes.SignupVerifyScreen.routes){
-//        SignupVerifyScreen()
-//     }
-
-
-
-
 
  }
 
